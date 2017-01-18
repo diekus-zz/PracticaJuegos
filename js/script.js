@@ -1,17 +1,22 @@
 var _ctx = null;
-var sprite = null;
+var _atlas = null;
+var _assets = [];
 
 function init(){
-    //check for cannvas support on the browser
     if(isCanvasSupported){
         setupCanvas();
     }
+    //loads ASSETS
+    loadAssetSource('/img/sp.png');
+    loadAssets();
 }
 
+//check for canvas support on the browser
 function isCanvasSupported(){
     return !!document.createElement('canvas').getContext;
 }
 
+//sets up the canvas in a full window space
 function setupCanvas(){
     var b = document.getElementsByTagName('body');
     var c = document.createElement('canvas');
@@ -21,25 +26,39 @@ function setupCanvas(){
     _ctx = c.getContext('2d');
 }
 
-function drawImageOnCanvas(source){
+//loads an atlas
+function loadAssetSource(source){
     var img = new Image();
-    img.onload = onImageLoad;
-    img.src = source;
-    
+    img.onload = function(){
+        console.log('loaded: ' + this.src);
+        _atlas = this;
+    };
+    img.src = source;    
 }
 
-onImageLoad = function(){
-    console.log('image loaded');
-};
-
-function requestResource(src){
+//extracts the asset info from the atlas
+function loadAssets(){
     var req = new XMLHttpRequest();
-    req.addEventListener("load", reqListener);
-    req.open("GET", src);
+    req.addEventListener('load', reqListener);
+    req.open('GET', '/img/sp.json');
     req.send();
+    function reqListener(){
+        //console.log(this.responseText);
+        _spAssets = JSON.parse(this.responseText);
+
+        for(f = 0; f < _spAssets.frames.length; f++){
+            var cf = _spAssets.frames[f];
+            _assets.push(new atlasAsset(cf.filename, cf.frame.x, cf.frame.y, cf.frame.w, cf.frame.h, cf.cx, cf.cy));
+        }
+    }
 }
 
-function reqListener(){
-    console.log(this.responseText);
-    sprite = JSON.parse(this.responseText);
+//draws thye selected image from a selected atlas in the canvas
+function drawImage(srcid, atlasInUse, x, y){
+    for(i = 0; i < _assets.length; i++){
+        if (_assets[i].id == srcid){
+            var a = _assets[i];
+            _ctx.drawImage(atlasInUse, a.x, a.y, a.w, a.h, x, y, a.w, a.h);
+        }
+    }
 }
