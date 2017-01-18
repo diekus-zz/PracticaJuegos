@@ -5,8 +5,8 @@ class atlasAsset{
         this.y = y;
         this.w = w;
         this.h = h;
-        this.cx = cx;
-        this.cy = cy;
+        this.cx = -w*.5;
+        this.cy = -h*.5;
         this.atlasName = atlasName;
     }
 }

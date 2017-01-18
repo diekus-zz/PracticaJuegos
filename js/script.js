@@ -78,7 +78,7 @@ function __drawImageInternal(srcid, atlasInUse, x, y){
     for(i = 0; i < _assets.length; i++){
         if (_assets[i].id == srcid){
             var a = _assets[i];
-            _ctx.drawImage(atlasInUse, a.x, a.y, a.w, a.h, x, y, a.w, a.h);
+            _ctx.drawImage(atlasInUse, a.x, a.y, a.w, a.h, x+a.w, y+a.h, a.w, a.h);
         }
     }
 }
