@@ -1,6 +1,5 @@
 var _ctx = null;
-var _atlas = null;
-var _gAtlases = {};
+var _gAtlases = []
 var _assets = [];
 
 function init(){
@@ -8,8 +7,7 @@ function init(){
         setupCanvas();
     }
     //loads ASSETS
-    loadAtlasImgSource('/img/sp.png');
-    loadAtlasJSONInfo('/img/sp.json');
+    loadAtlas('img/sp', '.png');
 }
 
 //check for canvas support on the browser
@@ -27,40 +25,52 @@ function setupCanvas(){
     _ctx = c.getContext('2d');
 }
 
-//loads an atlas
-function loadAtlasImgSource(source){
+//extracts the asset info from the atlas
+function loadAtlas(src, imgFormat){
+    //loads the atlas image
     var img = new Image();
     img.onload = function(){
         console.log('loaded: ' + this.src);
-        _atlas = this;
     };
-    img.src = source;    
-}
-
-//extracts the asset info from the atlas
-function loadAtlasJSONInfo(src){
+    img.src = src + imgFormat;  
+    //loads the JSON file
     var req = new XMLHttpRequest();
     req.addEventListener('load', reqListener);
-    req.open('GET', src);
+    req.open('GET', src + '.json');
     req.send();
     function reqListener(){
-        //console.log(this.responseText);
         _spAssets = JSON.parse(this.responseText);
         for(f = 0; f < _spAssets.frames.length; f++){
             var cf = _spAssets.frames[f];
-            _assets.push(new atlasAsset(cf.filename, cf.frame.x, cf.frame.y, cf.frame.w, cf.frame.h, cf.cx, cf.cy, src));
-            if(_gAtlases[src]==null){
-                _gAtlases[src] = [];
-                _gAtlases[src].push(cf.filename);
+            var str = src.substring(src.lastIndexOf('/')+1);
+            _assets.push(new atlasAsset(cf.filename, cf.frame.x, cf.frame.y, cf.frame.w, cf.frame.h, cf.cx, cf.cy, str));
+            if(_gAtlases[str]==null){
+                _gAtlases[str]=[];
+                _gAtlases[str].atlas = img;
+                _gAtlases[str].push(cf.filename);
             }
             else
-                _gAtlases[src].push(cf.filename);
+                _gAtlases[str].push(cf.filename);
         }
     }
 }
 
+//draws an image to the canvas
 function drawImage(srcid, x, y){
+    var atl = getAtlas(srcid);
+    __drawImageInternal(srcid, atl, x, y);
+}
 
+//gets the image atlas that has the resource
+function getAtlas(res){
+    var r = null;
+    for (i = 0; i < _assets.length; i++){
+        if(_assets[i].id == res){
+            r = _assets[i].atlasName;
+            break;
+        }
+    }
+    return _gAtlases[r].atlas;
 }
 
 //draws thye selected image from a selected atlas in the canvas

@@ -9,5 +9,4 @@ class atlasAsset{
         this.cy = cy;
         this.atlasName = atlasName;
     }
-
 }
