@@ -2,38 +2,38 @@
 
 {
 	"filename": "spBody.png",
-	"frame": {"x":0,"y":0,"w":203,"h":231},
+	"frame": {"x":0,"y":0,"w":121,"h":115},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":203,"h":231},
-	"sourceSize": {"w":203,"h":231},
+	"spriteSourceSize": {"x":0,"y":0,"w":121,"h":115},
+	"sourceSize": {"w":121,"h":115},
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
 	"filename": "spHead.png",
-	"frame": {"x":203,"y":0,"w":192,"h":175},
+	"frame": {"x":0,"y":115,"w":96,"h":87},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":175},
-	"sourceSize": {"w":192,"h":175},
+	"spriteSourceSize": {"x":0,"y":0,"w":96,"h":87},
+	"sourceSize": {"w":96,"h":87},
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
 	"filename": "spWalk1.png",
-	"frame": {"x":395,"y":0,"w":243,"h":231},
+	"frame": {"x":0,"y":202,"w":121,"h":115},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":243,"h":231},
-	"sourceSize": {"w":243,"h":231},
+	"spriteSourceSize": {"x":0,"y":0,"w":121,"h":115},
+	"sourceSize": {"w":121,"h":115},
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
 	"filename": "spWalk2.png",
-	"frame": {"x":638,"y":0,"w":164,"h":232},
+	"frame": {"x":0,"y":317,"w":121,"h":115},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":164,"h":232},
-	"sourceSize": {"w":164,"h":232},
+	"spriteSourceSize": {"x":0,"y":0,"w":121,"h":115},
+	"sourceSize": {"w":121,"h":115},
 	"pivot": {"x":0.5,"y":0.5}
 }],
 "meta": {
@@ -41,8 +41,8 @@
 	"version": "1.0",
 	"image": "sp.png",
 	"format": "RGBA8888",
-	"size": {"w":802,"h":232},
+	"size": {"w":121,"h":432},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:4d9de4c5f05266f186de9af499d84b01:b3980f21b3d0d31eddae850a83b533ab:fbdc332e8e6160ae33a878e633acadde$"
+	"smartupdate": "$TexturePacker:SmartUpdate:f8398779a10264114bc21caccb24ed53:6733d50c7b3ed036cb1a935fc74a6c95:fbdc332e8e6160ae33a878e633acadde$"
 }
 }
